@@ -1,8 +1,7 @@
 # Word-Guess Game
-
 Create a game which will allow the user to guess a word and get ASCII-art as feedback on their guesses.
 
-### The Rules:
+## The Rules:
 The word to guess is represented by a row of dashes, giving the number of letters. If the guess is a letter or number which occurs in the word, the word should be updated in all of the correct positions. If the suggested letter or number does not occur in the word, the game should draw or remove one element of the visual representation as a tally mark. The game is over when:
   - The player completes the word, or guesses the whole word correctly
   - The diagram representing the tally marks is complete
@@ -20,6 +19,9 @@ word: _ O _ D O _
 ```
 
 ## Baseline
+- Determine which person will be forking this repo to their Github account.
+- Add the other person as a _collaborator_ to the repo (this lets both people push and pull commits).
+- Both members of the pair must _clone_ the repo to their `~/C5/projects/` directory.
 - Determine what type of ASCII art your team would like to utilize - be creative!
 - Think through how you think you should structure your code. Your code should utilize class(es) and methods to keep functionality contained.
 - Create a program that will accept one user guess input and print it out in the terminal.
@@ -32,7 +34,7 @@ word: _ O _ D O _
 
 ### Technical
 - You should be able to play your game by running it using `ruby` from the terminal.
-- Use classes to contain your game logic. You may be able to implement your solution using just one class, but consider how isolating related functionality into separate classes may increase your code's readability and maintainability (single responsibility principle).
+- Use Ruby `class` objects to contain your game logic. You may be able to implement your solution using just one `class`, but consider how isolating related functionality into separate classes may increase your code's readability and maintainability.
 
 ## Optional Requirements
 - Use the colorize gem to make pieces of the ASCII art a different colors.
