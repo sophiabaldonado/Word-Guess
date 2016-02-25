@@ -8,19 +8,20 @@ class WordGuess
 def check_letter
   puts "Choose a letter"
 
-  #we ask for user input using gets.chomp
 
-tally = 0
-while tally < 3
-  puts @current_word
-  letter = gets.chomp
-      if @current_word.include? letter
-        puts letter
-      else
-        puts "no"
-        tally = tally + 1
-      end
- end
+  #we ask for user input using gets.chomp
+  tally = 0
+  while tally < 3
+    puts @current_word
+    letter = gets.chomp
+        if @current_word.include? letter
+          puts letter
+        else
+          puts "no"
+          tally = tally + 1
+        end
+   end
+
 
 
 end
