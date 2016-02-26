@@ -3,6 +3,7 @@ class WordGuess
     @word_array = ["make","go","taco"]
     @current_word = @word_array.sample
     @already_guessed_letters = []
+    @correct_letters = []
   end
 #this is what we show the user first. An image, and dashed lines and prompt choose a letter.
 
@@ -17,13 +18,17 @@ def check_letter
     letter = gets.chomp
     @already_guessed_letters << letter
     if @current_word.include? letter
-      puts letter
-
+      @current_word.split(//).each_index do |i|
+        if @current_word[i] == letter
+          @correct_letters[i] = letter
+          puts "correct letters: #{@correct_letters}"
+        end
+      end
     else
       puts "no"
       tally = tally + 1
     end
-    puts " you have gussed: #{@already_guessed_letters}"
+    puts " you have guessed: #{@already_guessed_letters}"
   end
 
 
