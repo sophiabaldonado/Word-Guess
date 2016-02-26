@@ -1,8 +1,9 @@
+require 'pry'
 require 'colorize'
 
 class WordGuess
   def initialize
-    @word_array = [ "tree"]
+    @word_array = %w[ tree]#legend dragon knight night wizard sorcerer centaur goblin queen king princess elf dwarf fairy conjure courageous slay honor joust kingdom sword spear forest]
     @current_word = @word_array.sample
     @already_guessed_letters = []
     @correct_letters = Array.new(@current_word.length, "_" )
@@ -11,31 +12,25 @@ class WordGuess
 #this is what we show the user first. An image, and dashed lines and prompt choose a letter.
 
 def ascii
-if @tally == 0
+  if @tally == 0
 puts "
-
-
-
-
-
-
                                                            _  _
-                                                          (.|( ) *
+                                                          (.|( ) ✨
                                                           (_Y|_/
                                                            /_|
                                                              L
                          "
 
-elsif @tally == 1
+  elsif @tally == 1
 puts "
 
   <~>
    | |,_____
          ___`|
-         |('>|`-__
+         |"+"('>".colorize(:red)+"|`-__
            ~      ~~~--__
                  ______  (@|                              _  _
-                /     ~~~~||                             (.|( ) *
+                /     ~~~~||                             (.|( ) ✨
         |       `--____                                   (_Y|_/
        / ~~~--_____    ~~~/                                /_|
                    `~~~~~                                    L
@@ -50,7 +45,7 @@ elsif @tally == 2
          |('>|`-__
            ~      ~~~--__
                  ______  (@|   *******                    _  _
-                /******~~~~||*********                   (.|( ) *
+                /******~~~~||*********                   (.|( ) ✨
         |       `--____***************                    (_Y|_/
        / ~~~--_____    ~~~/ ************                   /_|
                    `~~~~~         ******                     L
@@ -66,7 +61,7 @@ elsif @tally == 3
          |('>|`-__                                                  ⁻⁻⁻⁻⁻⁻
            ~      ~~~--__            **       *****       ****     o  *
                  ______  (@|   *******  ****         ***   _  _   º **
-                /******~~~~||********************  ****** (.|( ) *
+                /******~~~~||********************  ****** (.|( ) ✨
         |       `--____*************************** ******  (_Y|_/ ** **
        / ~~~--_____    ~~~/ *************************** **  /_| **      **
                    `~~~~~         *********************       L     ***
@@ -91,8 +86,8 @@ elsif @tally == 4
                                           ***       ***********
                                                           ********
 
-  ".colorize(:red)
-  puts "The word was: #{@current_word}".colorize(:magenta).blink
+  ".colorize(:red).blink
+  puts "The word was: #{@current_word}".colorize(:magenta)
   end
 end
 
@@ -103,6 +98,11 @@ def check_letter
     puts "Choose a letter"
     puts "Word: #{@correct_letters.join(" ")}".colorize(:green)
     letter = gets.chomp
+    if letter.length > 1
+      if letter == @current_word
+        you_win
+      end
+    end
     @already_guessed_letters << letter
     if @current_word.include? letter
       @current_word.split(//).each_index do |i|
@@ -110,29 +110,34 @@ def check_letter
           @correct_letters[i] = letter
         end
       end
+
       ascii
     else
       @tally = @tally + 1
       ascii
+      puts "Try again, mortal, the fairy is depending on you!🔥 ".colorize(:yellow)
     end
+
     if @current_word.split(//) == @correct_letters
-      puts "
-
-
-      .-:.     ::-.   ...      ...    :::  .::    .   .:::::::::.    :::. .: .:
-       ';;.   ;;;;'.;;;;;;;.   ;;     ;;;  ';;,  ;;  ;;;' ;;;`;;;;,  `;;;;;;;;;
-         '[[,[[[' ,[[      [[,[['     [[[   '[[, [[, [['  [[[  [[[[[. '[['[['[[
-           c$$''   SSS,     SSSSS      SSS    YScSSScSP   SSS  SSS 'YScSS SS SS
-         ,8P'`    '888,_ _,88P88    ,d888      '88'888    888  888    Y88 '' ''
-        mM'         'YMMMMMP'  'YmmMMMM''       'M 'M'    MMM  MMM     YM MM MM
-      ".colorize(:cyan).blink
-      exit
+      you_win
     end
     puts "You have guessed: #{@already_guessed_letters.join(" ")}".colorize(:blue)
   end
 end
 
+def you_win
+puts "
 
+
+.-:.     ::-.   ...      ...    :::  .::    .   .:::::::::.    :::. .: .:
+ ';;.   ;;;;'.;;;;;;;.   ;;     ;;;  ';;,  ;;  ;;;' ;;;`;;;;,  `;;;;;;;;;
+   '[[,[[[' ,[[      [[,[['     [[[   '[[, [[, [['  [[[  [[[[[. '[['[['[[
+     c$$''   SSS,     SSSSS      SSS    YScSSScSP   SSS  SSS 'YScSS SS SS
+   ,8P'`    '888,_ _,88P88    ,d888      '88'888    888  888    Y88 '' ''
+  mM'         'YMMMMMP'  'YmmMMMM''       'M 'M'    MMM  MMM     YM MM MM
+".colorize(:cyan).blink
+exit
+end
 
 #if the letter is part of the word or not tell the user and ask them for the next letter.
 #if letter is wrong decerement the tally if letter is right don't decerement
