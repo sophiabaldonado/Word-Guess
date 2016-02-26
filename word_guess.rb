@@ -7,13 +7,18 @@ class WordGuess
   end
 #this is what we show the user first. An image, and dashed lines and prompt choose a letter.
 
+def ascii
+  
+
+end
+
 def check_letter
-  puts "Choose a letter"
 
 
   #we ask for user input using gets.chomp
   tally = 0
   while tally < 3
+    puts "choose a letter"
     puts @current_word
     letter = gets.chomp
     @already_guessed_letters << letter
@@ -27,6 +32,7 @@ def check_letter
     else
       puts "no"
       tally = tally + 1
+      ascii
     end
     if @current_word.split(//) == @correct_letters
       puts "YOU WIN!!"
@@ -34,9 +40,6 @@ def check_letter
     end
     puts " you have guessed: #{@already_guessed_letters}"
   end
-
-
-
 end
 
 
