@@ -6,12 +6,27 @@ class WordGuess
     @current_word = @word_array.sample
     @already_guessed_letters = []
     @correct_letters = Array.new(@current_word.length, "_" )
-
+    @tally = 0
   end
 #this is what we show the user first. An image, and dashed lines and prompt choose a letter.
 
 def ascii
-if @tally == 1
+if @tally == 0
+puts "
+
+
+
+
+
+
+                                                           _  _
+                                                          (.|( ) *
+                                                          (_Y|_/
+                                                           /_|
+                                                             L
+                         "
+
+elsif @tally == 1
 puts "
 
   <~>
@@ -49,30 +64,24 @@ elsif @tally == 3
    | |,_____                                                        ______
          ___`|                                                     (Oh no!)
          |('>|`-__                                                  ⁻⁻⁻⁻⁻⁻
-           ~      ~~~--__            **                            o
-                 ______  (@|   *******  ****               _  _   º
+           ~      ~~~--__            **       *****       ****     o  *
+                 ______  (@|   *******  ****         ***   _  _   º **
                 /******~~~~||********************  ****** (.|( ) *
-        |       `--____*************************** ******  (_Y|_/ **
-       / ~~~--_____    ~~~/ *************************** **  /_| **
-                   `~~~~~         *********************       L
+        |       `--____*************************** ******  (_Y|_/ ** **
+       / ~~~--_____    ~~~/ *************************** **  /_| **      **
+                   `~~~~~         *********************       L     ***
                                         ****    *****  ***** ****
                                           ***
 
   "
 
-  ______
- (Oh no!)
-  ⁻⁻⁻⁻⁻⁻
- o
-º
-
 elsif @tally == 4
   puts "
-  <~>
-   | |,_____
-         ___`|
-         |('>|`-__
-           ~      ~~~--__            **              ***
+  <~>                          ___________
+   | |,_____                  (BWAHAHAAHA!)
+         ___`|                 ⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻
+         |('>|`-__            o
+           ~      ~~~--__   º        **              ***
                  ______  (@|   *******  ****    *******    ******
                 /******~~~~||**********************************
         |       `--____******************************************
@@ -82,30 +91,27 @@ elsif @tally == 4
                                           ***       ***********
                                                           ********
 
-  "
-
+  ".colorize(:red)
+  puts "The word was: #{@current_word}".colorize(:magenta).blink
   end
 end
 
 def check_letter
-
-
   #we ask for user input using gets.chomp
   @tally = 0
-  while @tally < 3
-    puts "choose a letter"
-    puts @current_word
+  while @tally < 4
+    puts "Choose a letter"
+    puts "Word: #{@correct_letters.join(" ")}".colorize(:green)
     letter = gets.chomp
     @already_guessed_letters << letter
     if @current_word.include? letter
       @current_word.split(//).each_index do |i|
         if @current_word[i] == letter
           @correct_letters[i] = letter
-          puts "correct letters: #{@correct_letters}"
         end
       end
+      ascii
     else
-      puts "no"
       @tally = @tally + 1
       ascii
     end
@@ -122,8 +128,7 @@ def check_letter
       ".colorize(:cyan).blink
       exit
     end
-    puts " you have guessed: #{@already_guessed_letters}"
-    puts " #{@correct_letters}"
+    puts "You have guessed: #{@already_guessed_letters.join(" ")}".colorize(:blue)
   end
 end
 
@@ -145,6 +150,9 @@ end
 
 
 
-
 a = WordGuess.new
+
+puts "FANTASY WORD GUESS GAME"
+puts "-" * 40
+a.ascii
 a.check_letter
