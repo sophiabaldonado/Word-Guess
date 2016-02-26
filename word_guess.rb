@@ -1,14 +1,14 @@
 class WordGuess
   def initialize
-    @word_array = ["make","go","taco"]
+    @word_array = [ "tree"]
     @current_word = @word_array.sample
     @already_guessed_letters = []
-    @correct_letters = []
+    @correct_letters = Array.new(@current_word.length, "_" )
   end
 #this is what we show the user first. An image, and dashed lines and prompt choose a letter.
 
 def ascii
-  
+
 
 end
 
@@ -39,6 +39,7 @@ def check_letter
       exit
     end
     puts " you have guessed: #{@already_guessed_letters}"
+    puts " #{@correct_letters}"
   end
 end
 
