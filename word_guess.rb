@@ -3,11 +3,27 @@ require 'colorize'
 
 class WordGuess
   def initialize
-    @word_array = %w[ tree]#legend dragon knight night wizard sorcerer centaur goblin queen king princess elf dwarf fairy conjure courageous slay honor joust kingdom sword spear forest]
-    @current_word = @word_array.sample
+    puts "FANTASY WORD GUESS GAME"
+    puts "-" * 40
+    @easy_word_array = %w[ tree legend dragon knight night wizard  goblin queen king princess elf dwarf fairy slay honor joust kingdom sword spear forest]
+    @hard_word_array = %w[kingdom centaur sorcerer courageous whimsical petrify leprechauns conjure enchanting cauldron]
     @already_guessed_letters = []
-    @correct_letters = Array.new(@current_word.length, "_" )
     @tally = 0
+    difficulty_level
+    @current_word = @word_array.sample
+    @correct_letters = Array.new(@current_word.length, "_" )
+  end
+
+
+
+  def difficulty_level
+    puts "What difficulty would you like? Easy or Hard?"
+    level = gets.chomp.downcase
+    if level == "hard"
+      @word_array = @hard_word_array
+    elsif level == "easy"
+      @word_array =@easy_word_array
+    end
   end
 #this is what we show the user first. An image, and dashed lines and prompt choose a letter.
 
@@ -157,7 +173,5 @@ end
 
 a = WordGuess.new
 
-puts "FANTASY WORD GUESS GAME"
-puts "-" * 40
 a.ascii
 a.check_letter
