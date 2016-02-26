@@ -28,6 +28,10 @@ def check_letter
       puts "no"
       tally = tally + 1
     end
+    if @current_word.split(//) == @correct_letters
+      puts "YOU WIN!!"
+      exit
+    end
     puts " you have guessed: #{@already_guessed_letters}"
   end
 
