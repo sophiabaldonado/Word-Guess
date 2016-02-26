@@ -2,7 +2,7 @@ class WordGuess
   def initialize
     @word_array = ["make","go","taco"]
     @current_word = @word_array.sample
-    @correct_letters = []
+    @already_guessed_letters = []
   end
 #this is what we show the user first. An image, and dashed lines and prompt choose a letter.
 
@@ -15,19 +15,15 @@ def check_letter
   while tally < 3
     puts @current_word
     letter = gets.chomp
+    @already_guessed_letters << letter
     if @current_word.include? letter
       puts letter
-      @current_word.split.each do |i|
-        if letter == i
-          @correct_letters[i.index] = letter
-          puts  "#{@correct_letters} this shold be an array"
-        end
-      end
 
     else
       puts "no"
       tally = tally + 1
     end
+    puts " you have gussed: #{@already_guessed_letters}"
   end
 
 
@@ -41,9 +37,17 @@ end
 
 #when tally == 0 lose and dragon art eats them
 #when user guesses the word end the program (or play again)
-
+# @current_word.split.each do |i|
+#   if letter == i
+#     @correct_letters[i.index] = letter
+#     puts  "#{@correct_letters} this shold be an array"
+#   end
+# end
 
 end
+
+
+
 
 a = WordGuess.new
 a.check_letter
