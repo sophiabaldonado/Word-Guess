@@ -1,4 +1,3 @@
-
 require 'colorize'
 
 class WordGuess
@@ -15,7 +14,11 @@ class WordGuess
   end
 
   # Do we want to show the user how many tries they have left each turn?
-  
+
+  # fix method call stuff at the bottom
+
+  # handle invalid input for the easy/hard method
+
   # We should turn this into a loop so that if they accidentally type something
   # other than easy or hard, it won't break the game
   def difficulty_level
