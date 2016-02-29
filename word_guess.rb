@@ -11,6 +11,8 @@ class WordGuess
     difficulty_level
     @current_word = @word_array.sample
     @correct_letters = Array.new(@current_word.length, "_" )
+    ascii
+    check_letter
   end
 
   # Do we want to show the user how many tries they have left each turn?
@@ -24,16 +26,21 @@ class WordGuess
   def difficulty_level
     puts "What difficulty would you like? Easy or Hard?"
     level = gets.chomp.downcase
-    if level == "hard"
-      @word_array = @hard_word_array
-    elsif level == "easy"
-      @word_array =@easy_word_array
-    end
+      if level == "hard"
+        @word_array = @hard_word_array
+      elsif level == "easy"
+        @word_array =@easy_word_array
+      end
   end
-  #this is what we show the user first. An image, and dashed lines and prompt choose a letter.
+
+
+      #this is what we show the user first. An image, and dashed lines and prompt choose a letter.
+
   def ascii
     if @tally == 0
-  puts "
+
+puts "
+
                                                            _  _
                                                           (.|( ) ✨
                                                           (_Y|_/
@@ -41,7 +48,7 @@ class WordGuess
                                                              L
                          "
 
-  elsif @tally == 1
+    elsif @tally == 1
   puts "
 
     <~>
@@ -89,7 +96,7 @@ class WordGuess
                                             "+"***".colorize(:red)+"
 
     "
-  elsif @tally == 4
+    elsif @tally == 4
     puts "
     <~>                          ___________
      | |,_____                  (BWAHAHAAHA!)
@@ -110,18 +117,18 @@ class WordGuess
     end
   end
 
-  def check_letter
-    #we ask for user input using gets.chomp
-    @tally = 0
-    while @tally < 4
-      puts "Choose a letter at your own risk!"
-      puts "Word: #{@correct_letters.join(" ")}".colorize(:green)
-      letter = gets.chomp
-      if letter.length > 1
-        if letter == @current_word
-          you_win
-        end
+def check_letter
+  #we ask for user input using gets.chomp
+  @tally = 0
+  while @tally < 4
+    puts "Choose a letter at your own risk!"
+    puts "Word: #{@correct_letters.join(" ")}".colorize(:green)
+    letter = gets.chomp
+    if letter.length > 1
+      if letter == @current_word
+        you_win
       end
+    end
       @already_guessed_letters << letter
       if @current_word.include? letter
         @current_word.split(//).each_index do |i|
@@ -142,9 +149,9 @@ class WordGuess
     end
   end
 
+
   def you_win
     puts "
-
 
     .-:.     ::-.   ...      ...    :::  .::    .   .:::::::::.    :::. .: .:
      ';;.   ;;;;'.;;;;;;;.   ;;     ;;;  ';;,  ;;  ;;;' ;;;`;;;;,  `;;;;;;;;;
@@ -158,8 +165,4 @@ class WordGuess
 end
 
 
-
-a = WordGuess.new
-
-a.ascii
-a.check_letter
+WordGuess.new
