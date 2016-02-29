@@ -24,16 +24,20 @@ class WordGuess
   # We should turn this into a loop so that if they accidentally type something
   # other than easy or hard, it won't break the game
   def difficulty_level
-    puts "What difficulty would you like? Easy or Hard?"
-    level = gets.chomp.downcase
+
+    puts "What difficulty would you like?"
+    level = nil
+    until level == "hard" || level == "easy"
+      puts "Please choose easy or hard."
+      level = gets.chomp.downcase
       if level == "hard"
         @word_array = @hard_word_array
       elsif level == "easy"
-        @word_array =@easy_word_array
+        @word_array = @easy_word_array
       end
+    end
+
   end
-
-
       #this is what we show the user first. An image, and dashed lines and prompt choose a letter.
 
   def ascii
@@ -127,6 +131,7 @@ def check_letter
     if letter.length > 1
       if letter == @current_word
         you_win
+        exit
       end
     end
       @already_guessed_letters << letter
@@ -144,9 +149,11 @@ def check_letter
       end
       if @current_word.split(//) == @correct_letters
         you_win
+        exit
       end
       puts "You have guessed: #{@already_guessed_letters.join(" ")}".colorize(:blue)
     end
+
   end
 
 
@@ -160,8 +167,25 @@ def check_letter
        ,8P'`    '888,_ _,88P88    ,d888      '88'888    888  888    Y88 '' ''
       mM'         'YMMMMMP'  'YmmMMMM''       'M 'M'    MMM  MMM     YM MM MM
     ".colorize(:cyan).blink
-    exit
+    #play_again we were working on this but we didn't have enough time to figure it out
   end
+
+
+
+#we were working on this but we didn't have enough time to figure it out
+  def play_again
+  puts "Would you like to play again yes or no."
+  play_again = gets.chomp
+    if play_again == "no"
+      exit
+    elsif play_again == "yes"
+      difficulty_level
+
+    end
+  end
+
+
+
 end
 
 
